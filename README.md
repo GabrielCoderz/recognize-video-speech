@@ -33,3 +33,7 @@ This project will transform the audio from video in a script. It will help, for 
 `npm i -D eslint-config-prettier`
 
 `npm i -D husky lint-staged`
+
+`npm run dev husky:prepare (husky install)`
+
+`npx husky add .husky/pre-commit "npm lint-staged"`
