@@ -8,6 +8,7 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint src/**/*.ts --max-warnings=0",
+    "prettier": "prettier --check src/**",
     "start": "NODE_PATH=./build node build/server.js",
     "build": "tsc -p .",
     "dev": "nodemon src/server.ts",
@@ -20,7 +21,8 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run lint --fix"
+      "npm run lint --fix",
+      "npm run prettier"
     ]
   },
   "dependencies": {
