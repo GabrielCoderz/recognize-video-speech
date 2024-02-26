@@ -34,6 +34,8 @@ This project will transform the audio from video in a script. It will help, for 
 
 `npm i -D husky lint-staged`
 
-`npm run dev husky:prepare (husky install)`
+<h4>Setup test environment</h4>
 
-`npx husky add .husky/pre-commit "npm lint-staged"`
+`npm install --save-dev jest`
+
+`npm install --save-dev @types/jest`
