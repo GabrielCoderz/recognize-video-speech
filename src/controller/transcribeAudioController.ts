@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { transcribeAudio } from "../service/transcribeAudioService";
+import transcribeAudioService from "../service/transcribeAudioService";
 
 async function transcribeAudioController(
   req: Request,
@@ -7,7 +7,12 @@ async function transcribeAudioController(
 ): Promise<void> {
   try {
     // const audioData: string = req.body.audioData;
-    const response: any = await transcribeAudio();
+    const response = await new transcribeAudioService().execute();
+
+    if (!response.results)
+      throw Error(
+        "Resultado vazio da transcrição. Favor tentar outro arquivo ou verifique sua rede.",
+      );
 
     const transcription = response.results
       .map((result: any) => result.alternatives[0].transcript)
