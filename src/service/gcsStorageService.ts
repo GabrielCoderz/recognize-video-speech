@@ -1,7 +1,7 @@
 import { Storage } from "@google-cloud/storage";
 import StorageService from "../interfaces/storageService";
 
-class GCSStorageService implements StorageService {
+export default class GCSStorageService implements StorageService {
   private storage: Storage;
 
   constructor() {
@@ -42,5 +42,3 @@ class GCSStorageService implements StorageService {
     }
   }
 }
-
-export default new GCSStorageService();

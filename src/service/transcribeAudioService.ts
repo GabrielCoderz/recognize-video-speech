@@ -1,8 +1,8 @@
 import { SpeechClient } from "@google-cloud/speech";
-import GCSStorageService from "./gcsStorageService";
+import GCSStorageService from "./GCSStorageService";
 import path from "path";
 
-export default class transcribeAudioService {
+export default class TranscribeAudioService {
   private client: SpeechClient;
   private request;
 
@@ -29,7 +29,7 @@ export default class transcribeAudioService {
   }
 
   async execute() {
-    await GCSStorageService.fazerUpload(
+    await new GCSStorageService().fazerUpload(
       path.resolve(__dirname, "../tmp/output.wav"),
       "audio-files/output.wav",
     );
@@ -42,7 +42,7 @@ export default class transcribeAudioService {
 
     console.log(`Log: Transcribe finalizado`);
 
-    await GCSStorageService.removeFile("audio-files/output.wav");
+    await new GCSStorageService().removeFile("audio-files/output.wav");
 
     return response;
   }

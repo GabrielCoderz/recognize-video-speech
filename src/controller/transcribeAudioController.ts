@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import transcribeAudioService from "../service/transcribeAudioService";
+import transcribeAudioService from "../service/TranscribeAudioService";
 
 async function transcribeAudioController(
   req: Request,
