@@ -1,28 +1,22 @@
 import { Request, Response } from "express";
-import transcribeAudioService from "../service/TranscribeAudioService";
+import RecognizeVideoService, {
+  IRecognizeVideoParams,
+} from "../service/RecognizeVideoService";
 
-async function transcribeAudioController(
-  req: Request,
-  res: Response,
-): Promise<void> {
-  try {
-    // const audioData: string = req.body.audioData;
-    const response = await new transcribeAudioService().execute();
+export default class TranscribeAudioController {
+  async handle(req: Request, res: Response): Promise<void> {
+    const { urlVideoYT } = req.body;
 
-    if (!response.results)
-      throw Error(
-        "Resultado vazio da transcrição. Favor tentar outro arquivo ou verifique sua rede.",
-      );
+    const recognizeVideoService = new RecognizeVideoService();
 
-    const transcription = response.results
-      .map((result: any) => result.alternatives[0].transcript)
-      .join("\n");
+    const data: IRecognizeVideoParams = {
+      urlVideo: urlVideoYT,
+      sourceNameVideo: "source",
+      outputNameVideo: "output",
+    };
 
-    res.json({ transcription });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erro durante a transcrição" });
+    const result = await recognizeVideoService.execute(data);
+
+    res.json({ transcription: result });
   }
 }
-
-export { transcribeAudioController };

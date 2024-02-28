@@ -16,17 +16,17 @@ export default class FileConverterService {
 
   async execute(params: IConversorVideoConfig): Promise<string> {
     return new Promise((resolve, reject) => {
-      ffmpeg(path.resolve(__dirname, `./tmp/${params.sourceNameVideo}.mp4`))
-        .toFormat(this.formatter)
+      ffmpeg(path.resolve(__dirname, `../tmp/${params.sourceNameVideo}.mp4`))
+        .toFormat("wav")
         .saveToFile(
-          path.resolve(__dirname + `/tmp/${params.outputNameVideo}.wav`),
+          path.resolve(__dirname + `/../tmp/${params.outputNameVideo}.wav`),
         )
         .once("end", () => {
           const result = "Vídeo convertido.";
           console.log(`Log: ${result}`);
 
           unlink(
-            path.resolve(__dirname, `./tmp/${params.sourceNameVideo}.mp4`),
+            path.resolve(__dirname, `../tmp/${params.sourceNameVideo}.mp4`),
             (err) => {
               if (err) reject(err);
               console.log("Log: O arquivo source foi deletado.");
